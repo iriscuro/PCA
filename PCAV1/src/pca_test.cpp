@@ -10,14 +10,52 @@
 using namespace std;
 namespace fs = std::experimental::filesystem;
 
+// Función para generar una matriz con puntos aleatorios distribuidos en forma de mariposa
+Eigen::MatrixXf generarFigura(int n)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> dis(0, 2 * M_PI);
+
+    Eigen::MatrixXf figura(n, 3);
+    for (int i = 0; i < n; ++i)
+    {
+        float x = static_cast<float>(i - n / 2);
+        float theta1 = dis(gen);
+        float theta2 = dis(gen);
+        float y = x * std::sin(theta1);
+        float z = x * std::sin(theta2);
+
+        figura(i, 0) = x;
+        figura(i, 1) = y;
+        figura(i, 2) = z;
+    }
+
+    return figura;
+}
+
+
+
+
 int main(int argc, char* argv[])
 {
+    
+    if (argc != 2)
+    {
+        std::cout << "Usage: " << argv[0] << "(matrix size) m x 3 e.g. 10 x 3" << std::endl;
+        return EXIT_FAILURE;
+    }
+    
+    int m = std::stoi(argv[1]);
+    
     // Generar puntos aleatorios en pca_data_matrix
+    Eigen::MatrixXf pca_data_matrix = generarFigura(m);
+    /*
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dis(-5.0, 5.0);
 
-    Eigen::Matrix<float, Eigen::Dynamic, 3> pca_data_matrix(10, 3);
+    Eigen::Matrix<float, Eigen::Dynamic, 3> pca_data_matrix(m, 3);
     for (int i = 0; i < pca_data_matrix.rows(); ++i)
     {
         for (int j = 0; j < pca_data_matrix.cols(); ++j)
@@ -25,7 +63,7 @@ int main(int argc, char* argv[])
             pca_data_matrix(i, j) = dis(gen);
         }
     }
-
+    */
     // Guardar la matriz en un archivo de texto
     std::ofstream outfile("pca_data.txt");
     if (outfile.is_open())
@@ -89,3 +127,4 @@ int main(int argc, char* argv[])
 
     return EXIT_SUCCESS;
 }
+
