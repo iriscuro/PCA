@@ -19,12 +19,14 @@ Make sure you have CMake and Python 3 installed on your system before following 
    ```
    
 4. Next, compile the pca_test.cpp program by providing the number of points to generate (N) as an argument. For example, to generate 100 points, execute the following command:
-   ```./cmake_eigen 100
-
+   ```shell
+   ./cmake_eigen 100
+   ```
    This will compile the source code and generate a text file pca_data.txt that contains the matrix of points and the eigenvector calculated using PCA.
 5. To visualize the plot with the point cloud and the eigenvector, run the following command:
-   ```python3 pca_example.py
-   
+   ```shell
+   python3 pca_example.py
+   ```
    This will open a window displaying the graphical representation of the points and the eigenvector in a 3D space.
 
 
