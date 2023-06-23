@@ -16,6 +16,7 @@ Make sure you have CMake and Python 3 installed on your system before following 
 
    ```shell
    cmake CMakeLists.txt
+   make
    ```
    
 4. Next, compile the pca_test.cpp program by providing the number of points to generate (N) as an argument. For example, to generate 100 points, execute the following command:
